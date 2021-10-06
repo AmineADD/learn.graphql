@@ -2,10 +2,10 @@
  *  Importattion 
  */
 const { ApolloServer } = require('apollo-server');
-var users=require('./Data/UsersData.js')
+var users = require('./Data/UsersData.js')
 var posts = require('./Data/PostsData.js')
 var typeDefs = require('./Schema/typeDef.js');
- 
+
 /**
  *  resolver 
  */
@@ -17,32 +17,32 @@ const resolvers = {
   },
   Mutation: {
     deleteUser: (root, vars) => {
-      users = users.filter( user => user.id !== vars.id)  
+      users = users.filter(user => user.id !== vars.id)
       return true
     },
     deletePost: (root, vars) => {
-      posts = users.filter( posts => posts.id !== vars.id)  
+      posts = users.filter(posts => posts.id !== vars.id)
       return true
     },
-    createUser:(root, vars)=>{ 
+    createUser: (root, vars) => {
       return users.push(vars.input)
     },
-    updateUser:(root, vars)=>{ 
-      
-      users =  users.map((user)=>{user.id===vars.input.id ? (vars.input) : user})
+    updateUser: (root, vars) => {
+
+      users = users.map((user) => { user.id === vars.input.id ? (vars.input) : user })
       return true;
-      
+
     },
-    createPost:(root, vars)=>{
+    createPost: (root, vars) => {
       return posts.push(vars.input)
     },
-    updatePost:(root, vars)=>{
-   
-        posts =  posts.map((post)=>{post.id===vars.input.id ? (vars.input) : post})
-        return true;
-       
+    updatePost: (root, vars) => {
+
+      posts = posts.map((post) => { post.id === vars.input.id ? (vars.input) : post })
+      return true;
+
     }
-    
+
   }
 };
 
@@ -72,4 +72,4 @@ server.listen().then(({ url }) => {
 
 
 
- 
+
