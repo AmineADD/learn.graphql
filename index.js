@@ -14,6 +14,15 @@ const resolvers = {
   Query: {
     users: () => users,
     posts: () => posts,
+    userById : (root,data)=>{ 
+      return users[users.findIndex(user=> user.id === data.id)]
+    },
+    postById :(root,data)=> {
+      return posts[data.id]
+    },
+    commentsByPostId:(root,data)=>{ 
+      return posts[data.id].posts
+    }  
   },
   Mutation: {
     deleteUser: (root, vars) => {
@@ -21,7 +30,7 @@ const resolvers = {
       return true
     },
     deletePost: (root, vars) => {
-      posts = users.filter(posts => posts.id !== vars.id)
+      posts = posts.filter(posts => posts.id !== vars.id)
       return true
     },
     createUser: (root, vars) => {
@@ -36,11 +45,9 @@ const resolvers = {
     createPost: (root, vars) => {
       return posts.push(vars.input)
     },
-    updatePost: (root, vars) => {
-
+    updatePost: (root, vars) => { 
       posts = posts.map((post) => { post.id === vars.input.id ? (vars.input) : post })
       return true;
-
     }
 
   }

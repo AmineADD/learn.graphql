@@ -11,6 +11,9 @@ input DateInput {
 type Query {
     users: [User]
     posts: [Post]
+    userById(id: Int!) : User
+    postById(id: Int!) : Post
+    commentsByPostId(id: Int!) : [Post]
   }
 
 type User {
